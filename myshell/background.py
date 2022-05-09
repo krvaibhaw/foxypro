@@ -9,3 +9,4 @@ def handle_background(command):
         print(f"Started process {process.pid} in background")
     except FileNotFoundError:
         print(f"Command not found: {command}")
+        
