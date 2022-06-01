@@ -25,3 +25,5 @@ def handle_redirection(command):
             subprocess.run(parts, check=True)
     except subprocess.CalledProcessError:
         print(f"Command failed: {' '.join(parts)}")
+            except FileNotFoundError:
+        print(f"Command not found: {' '.join(parts)}")
