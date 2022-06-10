@@ -27,3 +27,5 @@ def handle_redirection(command):
         print(f"Command failed: {' '.join(parts)}")
     except FileNotFoundError:
         print(f"Command not found: {' '.join(parts)}")
+    except Exception as e:
+        print(f"Error executing command '{' '.join(parts)}': {e}")
