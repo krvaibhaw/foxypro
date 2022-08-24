@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+# from myshell.core import main_loop
+
+# if __name__ == "__main__":
+#     main_loop()
+
+
+#!/usr/bin/env python3
+
+import sys
+import os
+
+# Navigate to the parent directory of the current script
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(parent_dir)
+
+from myshell.core import main_loop
+
+if __name__ == "__main__":
+    main_loop()
