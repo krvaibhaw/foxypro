@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
 
-# from myshell.core import main_loop
-
-# if __name__ == "__main__":
-#     main_loop()
-
-
-#!/usr/bin/env python3
-
 import sys
 import os
 
