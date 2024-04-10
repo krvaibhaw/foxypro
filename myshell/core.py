@@ -17,3 +17,9 @@ BANNER = r"""
 /**      //******  ** //**  **     /**     /***   //****** 
 //        //////  //   //  //      //      ///     //////  
 """
+
+def main_loop():
+    print(BANNER)
+    print("=" * 60)
+    print("  Welcome to Foxypro Shell  |  type 'help' to get started")
+    print("=" * 60 + "\n")
