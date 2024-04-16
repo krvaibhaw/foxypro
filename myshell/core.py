@@ -23,3 +23,10 @@ def main_loop():
     print("=" * 60)
     print("  Welcome to Foxypro Shell  |  type 'help' to get started")
     print("=" * 60 + "\n")
+
+    load_aliases()  # restore aliases saved from previous sessions
+    
+    while True:
+        try:
+            cwd = os.getcwd()
+            user_input = input(f"{cwd}$ ")
