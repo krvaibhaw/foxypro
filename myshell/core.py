@@ -36,3 +36,5 @@ def main_loop():
                 print("Goodbye!")
                 break
 
+            if user_input.strip():
+                process_command(user_input)
