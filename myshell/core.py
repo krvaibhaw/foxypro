@@ -38,3 +38,7 @@ def main_loop():
 
             if user_input.strip():
                 process_command(user_input)
+
+        except KeyboardInterrupt:
+            # Ctrl-C cancels the current line; don't exit
+            print()
