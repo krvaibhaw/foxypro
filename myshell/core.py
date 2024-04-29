@@ -42,3 +42,8 @@ def main_loop():
         except KeyboardInterrupt:
             # Ctrl-C cancels the current line; don't exit
             print()
+            
+        except EOFError:
+            save_aliases()
+            print("\nGoodbye!")
+            break
