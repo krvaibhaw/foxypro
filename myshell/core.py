@@ -42,8 +42,19 @@ def main_loop():
         except KeyboardInterrupt:
             # Ctrl-C cancels the current line; don't exit
             print()
-            
+
         except EOFError:
             save_aliases()
             print("\nGoodbye!")
             break
+
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+
+def expand_variables(command: str) -> str:
+    """Expand $VAR and ${VAR} style environment variables in a command."""
+    def replace_var(match):
+        var_name = match.group(1) or match.group(2)
+        return os.environ.get(var_name, "")
+
+    return re.sub(r'\$\{(\w+)\}|\$(\w+)', replace_var, command)
