@@ -58,3 +58,9 @@ def expand_variables(command: str) -> str:
         return os.environ.get(var_name, "")
 
     return re.sub(r'\$\{(\w+)\}|\$(\w+)', replace_var, command)
+
+def process_command(command: str) -> None:
+    """
+    Top-level command processor.
+    Handles: validation → variable expansion → history → chaining → dispatch.
+    """
