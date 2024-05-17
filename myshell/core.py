@@ -64,3 +64,8 @@ def process_command(command: str) -> None:
     Top-level command processor.
     Handles: validation → variable expansion → history → chaining → dispatch.
     """
+    # 1. Validate
+    is_valid, message = validate_command(command)
+    if not is_valid:
+        print_error(f"Syntax error: {message}")
+        return
