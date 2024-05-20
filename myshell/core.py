@@ -69,3 +69,9 @@ def process_command(command: str) -> None:
     if not is_valid:
         print_error(f"Syntax error: {message}")
         return
+    
+    # 2. Expand environment variables
+    command = expand_variables(command)
+
+    # 3. Record in history (store the expanded form)
+    add_to_history(command)
