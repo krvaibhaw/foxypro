@@ -75,3 +75,18 @@ def process_command(command: str) -> None:
 
     # 3. Record in history (store the expanded form)
     add_to_history(command)
+
+    # 4. Handle command chaining with ';'
+    #    Only split on ';' when there is no pipe in the whole command string,
+    #    to keep "cmd1 | cmd2 ; cmd3" handled correctly.
+    if ';' in command:
+        # Respect semicolons even when a pipe is present by processing
+        # each semicolon-delimited segment independently.
+        commands = _split_on_semicolons(command)
+        for cmd in commands:
+            cmd = cmd.strip()
+            if cmd:
+                process_single_command(cmd)
+        return
+
+    process_single_command(command)
