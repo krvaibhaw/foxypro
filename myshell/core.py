@@ -90,3 +90,30 @@ def process_command(command: str) -> None:
         return
 
     process_single_command(command)
+
+def _split_on_semicolons(command: str) -> list[str]:
+    """
+    Split on ';' while ignoring semicolons inside quoted strings.
+    """
+    parts = []
+    current = []
+    in_single = False
+    in_double = False
+
+    for ch in command:
+        if ch == "'" and not in_double:
+            in_single = not in_single
+            current.append(ch)
+        elif ch == '"' and not in_single:
+            in_double = not in_double
+            current.append(ch)
+        elif ch == ';' and not in_single and not in_double:
+            parts.append(''.join(current))
+            current = []
+        else:
+            current.append(ch)
+
+    if current:
+        parts.append(''.join(current))
+
+    return parts
