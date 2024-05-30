@@ -7,6 +7,7 @@ from myshell.utils import parse_command
 from myshell.builtins import execute_builtin, is_builtin, add_to_history, load_aliases, save_aliases
 from myshell.validation import validate_command, print_error
 
+
 BANNER = r"""
  ********                                                  
 /**/////                    **   ** ******                 
@@ -17,6 +18,7 @@ BANNER = r"""
 /**      //******  ** //**  **     /**     /***   //****** 
 //        //////  //   //  //      //      ///     //////  
 """
+
 
 def main_loop():
     print(BANNER)
@@ -42,14 +44,13 @@ def main_loop():
         except KeyboardInterrupt:
             # Ctrl-C cancels the current line; don't exit
             print()
-
         except EOFError:
             save_aliases()
             print("\nGoodbye!")
             break
-
         except Exception as e:
             print(f"Unexpected error: {e}")
+
 
 def expand_variables(command: str) -> str:
     """Expand $VAR and ${VAR} style environment variables in a command."""
@@ -58,6 +59,7 @@ def expand_variables(command: str) -> str:
         return os.environ.get(var_name, "")
 
     return re.sub(r'\$\{(\w+)\}|\$(\w+)', replace_var, command)
+
 
 def process_command(command: str) -> None:
     """
@@ -69,7 +71,7 @@ def process_command(command: str) -> None:
     if not is_valid:
         print_error(f"Syntax error: {message}")
         return
-    
+
     # 2. Expand environment variables
     command = expand_variables(command)
 
@@ -90,6 +92,7 @@ def process_command(command: str) -> None:
         return
 
     process_single_command(command)
+
 
 def _split_on_semicolons(command: str) -> list[str]:
     """
@@ -118,9 +121,11 @@ def _split_on_semicolons(command: str) -> list[str]:
 
     return parts
 
+
 def _has_redirection_or_pipe(command: str) -> bool:
     """Return True if the command contains a pipe or redirection operator."""
     return any(op in command for op in ('|', '>', '>>', '<'))
+
 
 def process_single_command(command: str) -> None:
     """
