@@ -117,3 +117,7 @@ def _split_on_semicolons(command: str) -> list[str]:
         parts.append(''.join(current))
 
     return parts
+
+def _has_redirection_or_pipe(command: str) -> bool:
+    """Return True if the command contains a pipe or redirection operator."""
+    return any(op in command for op in ('|', '>', '>>', '<'))
