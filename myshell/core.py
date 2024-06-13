@@ -121,3 +121,22 @@ def _split_on_semicolons(command: str) -> list[str]:
 def _has_redirection_or_pipe(command: str) -> bool:
     """Return True if the command contains a pipe or redirection operator."""
     return any(op in command for op in ('|', '>', '>>', '<'))
+
+def process_single_command(command: str) -> None:
+    """
+    Execute a single command (no ';' chaining at this level).
+    Decides between: built-in → background → redirection/external.
+
+    Important: even if the first word is a built-in (e.g. 'echo'),
+    redirect/pipe operators must be handled by handle_redirection so
+    that  'echo hi >> file.txt'  actually writes to the file instead
+    of printing 'hi >> file.txt' literally.
+    """
+    background, command = parse_command(command)
+
+    if is_builtin(command) and not _has_redirection_or_pipe(command):
+        execute_builtin(command)
+    elif background:
+        handle_background(command)
+    else:
+        handle_redirection(command)
