@@ -1,0 +1,9 @@
+{
+  "l": "ls",
+  "ll": "ls -la",
+  "cls": "clear",
+  "p": "pwd",
+  "h": "history",
+  "mk": "mkdir",
+  "rm": "rmdir"
+}
