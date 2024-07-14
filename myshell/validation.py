@@ -5,6 +5,8 @@ class Colors:
     FAIL = '\033[91m'
     WARNING = '\033[93m'
     ENDC = '\033[0m'
+
+
 def validate_command(command):
     """Validate command syntax before execution."""
     if not command.strip():
@@ -41,3 +43,8 @@ def validate_command(command):
         return False, "Input redirection has no source filename"
 
     return True, "Valid"
+
+
+def print_error(message):
+    """Print a formatted error message."""
+    print(f"{Colors.FAIL}Error: {message}{Colors.ENDC}")
