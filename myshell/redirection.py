@@ -1,31 +1,19 @@
 import subprocess
-import shlex
+import platform
+
+
 def handle_redirection(command):
-    parts = shlex.split(command)
-    try:
-        if '>' in parts:
-            index = parts.index('>')
-            filename = parts[index + 1]
-            parts = parts[:index]
-            with open(filename, 'w') as f:
-                subprocess.run(parts, stdout=f, check=True)
-        elif '>>' in parts:
-            index = parts.index('>>')
-            filename = parts[index + 1]
-            parts = parts[:index]
-            with open(filename, 'a') as f:
-                subprocess.run(parts, stdout=f, check=True)
-        elif '<' in parts:
-            index = parts.index('<')
-            filename = parts[index + 1]
-            parts = parts[:index]
-            with open(filename, 'r') as f:
-                subprocess.run(parts, stdin=f, check=True)
-        else:
-            subprocess.run(parts, check=True)
-    except subprocess.CalledProcessError:
-        print(f"Command failed: {' '.join(parts)}")
-    except FileNotFoundError:
-        print(f"Command not found: {' '.join(parts)}")
-    except Exception as e:
-        print(f"Error executing command '{' '.join(parts)}': {e}")
+    """
+    Dispatch command to the correct handler based on redirection/pipe operators.
+    Order matters: '>>' must be checked before '>' to avoid incorrect splitting.
+    """
+    if '|' in command:
+        handle_pipe(command)
+    elif '>>' in command:
+        handle_append_redirect(command)
+    elif '>' in command:
+        handle_write_redirect(command)
+    elif '<' in command:
+        handle_input_redirect(command)
+    else:
+        run_simple(command)
