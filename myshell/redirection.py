@@ -17,3 +17,14 @@ def handle_redirection(command):
         handle_input_redirect(command)
     else:
         run_simple(command)
+        
+def run_simple(command):
+    """Run a plain command with no redirection."""
+    try:
+        subprocess.run(command, check=True, shell=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Command failed with exit code {e.returncode}")
+    except FileNotFoundError:
+        print(f"Command not found: {command.split()[0]}")
+    except Exception as e:
+        print(f"Error: {e}")
