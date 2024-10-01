@@ -44,3 +44,19 @@ def handle_write_redirect(command):
         print(f"Command failed with exit code {e.returncode}")
     except Exception as e:
         print(f"Error: {e}")
+
+def handle_append_redirect(command):
+    """Handle output redirection: cmd >> file  (append)"""
+    try:
+        parts = command.split('>>', 1)
+        cmd = parts[0].strip()
+        filename = parts[1].strip()
+        if not filename:
+            print("Error: No filename specified for '>>'")
+            return
+        with open(filename, 'a') as f:
+            subprocess.run(cmd, stdout=f, check=True, shell=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Command failed with exit code {e.returncode}")
+    except Exception as e:
+        print(f"Error: {e}")
