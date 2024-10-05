@@ -60,3 +60,21 @@ def handle_append_redirect(command):
         print(f"Command failed with exit code {e.returncode}")
     except Exception as e:
         print(f"Error: {e}")
+
+def handle_input_redirect(command):
+    """Handle input redirection: cmd < file"""
+    try:
+        parts = command.split('<', 1)
+        cmd = parts[0].strip()
+        filename = parts[1].strip()
+        if not filename:
+            print("Error: No filename specified for '<'")
+            return
+        with open(filename, 'r') as f:
+            subprocess.run(cmd, stdin=f, check=True, shell=True)
+    except FileNotFoundError:
+        print(f"File not found: {filename}")
+    except subprocess.CalledProcessError as e:
+        print(f"Command failed with exit code {e.returncode}")
+    except Exception as e:
+        print(f"Error: {e}")
