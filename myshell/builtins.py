@@ -18,3 +18,17 @@ class Colors:
     ENDC      = '\033[0m'
     BOLD      = '\033[1m'
     UNDERLINE = '\033[4m'
+    
+# ── Mutable shell state ──────────────────────────────────────────────────────
+
+command_history: list[str] = []
+
+aliases: dict[str, str] = {
+    'l':   'ls',
+    'll':  'ls -la',
+    'cls': 'clear',
+    'p':   'pwd',
+    'h':   'history',
+    'mk':  'mkdir',
+    'rm':  'rmdir',
+}
