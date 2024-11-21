@@ -18,7 +18,7 @@ class Colors:
     ENDC      = '\033[0m'
     BOLD      = '\033[1m'
     UNDERLINE = '\033[4m'
-    
+
 # ── Mutable shell state ──────────────────────────────────────────────────────
 
 command_history: list[str] = []
@@ -32,3 +32,26 @@ aliases: dict[str, str] = {
     'mk':  'mkdir',
     'rm':  'rmdir',
 }
+
+# ── Alias persistence ────────────────────────────────────────────────────────
+
+def load_aliases() -> None:
+    """Load saved aliases from disk and merge into the aliases dict."""
+    if not os.path.exists(ALIAS_FILE):
+        return
+    try:
+        with open(ALIAS_FILE, 'r') as f:
+            saved = json.load(f)
+        if isinstance(saved, dict):
+            aliases.update(saved)
+    except Exception as e:
+        print(f"{Colors.WARNING}⚠ Could not load aliases: {e}{Colors.ENDC}")
+
+
+def save_aliases() -> None:
+    """Save the current aliases dict to disk."""
+    try:
+        with open(ALIAS_FILE, 'w') as f:
+            json.dump(aliases, f, indent=2)
+    except Exception as e:
+        print(f"{Colors.WARNING}⚠ Could not save aliases: {e}{Colors.ENDC}")
