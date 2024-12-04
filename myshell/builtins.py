@@ -55,3 +55,18 @@ def save_aliases() -> None:
             json.dump(aliases, f, indent=2)
     except Exception as e:
         print(f"{Colors.WARNING}⚠ Could not save aliases: {e}{Colors.ENDC}")
+
+# ── Built-in command names (aliases are also considered built-ins)
+BUILTINS = [
+    'cd', 'pwd', 'echo', 'clear', 'help',
+    'dir', 'ls', 'set', 'history',
+    'mkdir', 'rmdir', 'type', 'alias', 'unalias', 'env',
+]
+
+
+# ── History helpers ──────────────────────────────────────────────────────────
+
+def add_to_history(command: str) -> None:
+    """Append a non-empty command to the history list."""
+    if command.strip():
+        command_history.append(command.strip())
