@@ -70,3 +70,47 @@ def add_to_history(command: str) -> None:
     """Append a non-empty command to the history list."""
     if command.strip():
         command_history.append(command.strip())
+
+# ── Dispatch helpers ─────────────────────────────────────────────────────────
+
+def is_builtin(command: str) -> bool:
+    """Return True when the first word of *command* is a built-in or alias."""
+    cmd_name = command.split()[0] if command.split() else ""
+    return cmd_name in BUILTINS or cmd_name in aliases
+
+
+def execute_builtin(command: str) -> None:
+    """Parse and execute a built-in command."""
+    parts    = command.split(maxsplit=1)
+    cmd_name = parts[0]
+    args     = parts[1] if len(parts) > 1 else ""
+
+    # Resolve alias first (recursive so alias chains work)
+    if cmd_name in aliases:
+        full_command = aliases[cmd_name] + (" " + args if args else "")
+        execute_builtin(full_command)
+        return
+
+    dispatch = {
+        "cd":      lambda: builtin_cd(args),
+        "pwd":     lambda: builtin_pwd(),
+        "echo":    lambda: builtin_echo(args),
+        "clear":   lambda: builtin_clear(),
+        "help":    lambda: builtin_help(),
+        "dir":     lambda: builtin_ls(args),
+        "ls":      lambda: builtin_ls(args),
+        "set":     lambda: builtin_set(args),
+        "history": lambda: builtin_history(),
+        "mkdir":   lambda: builtin_mkdir(args),
+        "rmdir":   lambda: builtin_rmdir(args),
+        "type":    lambda: builtin_type(args),
+        "alias":   lambda: builtin_alias(args),
+        "unalias": lambda: builtin_unalias(args),
+        "env":     lambda: builtin_env(args),
+    }
+
+    handler = dispatch.get(cmd_name)
+    if handler:
+        handler()
+    else:
+        print(f"Unknown built-in command: {cmd_name}")
