@@ -114,3 +114,25 @@ def execute_builtin(command: str) -> None:
         handler()
     else:
         print(f"Unknown built-in command: {cmd_name}")
+
+# ── Built-in implementations ─────────────────────────────────────────────────
+
+def builtin_cd(args: str) -> None:
+    """Change the current working directory."""
+    path = args.strip() if args else os.path.expanduser("~")
+    try:
+        os.chdir(path)
+        print(f"Changed to {os.getcwd()}")
+    except FileNotFoundError:
+        print(f"{Colors.FAIL}✗ cd: directory not found: {path}{Colors.ENDC}")
+    except NotADirectoryError:
+        print(f"{Colors.FAIL}✗ cd: not a directory: {path}{Colors.ENDC}")
+    except PermissionError:
+        print(f"{Colors.FAIL}✗ cd: permission denied: {path}{Colors.ENDC}")
+    except Exception as e:
+        print(f"{Colors.FAIL}✗ cd: {e}{Colors.ENDC}")
+
+
+def builtin_pwd() -> None:
+    """Print the current working directory."""
+    print(f"{Colors.OKBLUE}{os.getcwd()}{Colors.ENDC}")
