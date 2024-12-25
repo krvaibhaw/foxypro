@@ -136,3 +136,12 @@ def builtin_cd(args: str) -> None:
 def builtin_pwd() -> None:
     """Print the current working directory."""
     print(f"{Colors.OKBLUE}{os.getcwd()}{Colors.ENDC}")
+
+def builtin_echo(args: str) -> None:
+    """Print text to stdout."""
+    print(args)
+
+
+def builtin_clear() -> None:
+    """Clear the terminal screen."""
+    os.system("cls" if platform.system() == "Windows" else "clear")
