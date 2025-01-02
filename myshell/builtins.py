@@ -145,3 +145,55 @@ def builtin_echo(args: str) -> None:
 def builtin_clear() -> None:
     """Clear the terminal screen."""
     os.system("cls" if platform.system() == "Windows" else "clear")
+
+
+def builtin_help() -> None:
+    """Display help information."""
+    C = Colors
+    help_text = f"""
+{C.BOLD}{C.OKBLUE}╔══════════════════════════════════════════════════════╗{C.ENDC}
+{C.BOLD}{C.OKBLUE}║          Foxypro Shell - Built-in Commands           ║{C.ENDC}
+{C.BOLD}{C.OKBLUE}╚══════════════════════════════════════════════════════╝{C.ENDC}
+
+{C.OKGREEN}{C.BOLD}Navigation:{C.ENDC}
+  {C.OKCYAN}cd{C.ENDC} [path]              Change directory (home if no path given)
+  {C.OKCYAN}pwd{C.ENDC}                    Print current working directory
+
+{C.OKGREEN}{C.BOLD}File Operations:{C.ENDC}
+  {C.OKCYAN}ls{C.ENDC} / {C.OKCYAN}dir{C.ENDC} [path]       List directory contents
+  {C.OKCYAN}mkdir{C.ENDC} <dir>            Create a directory
+  {C.OKCYAN}rmdir{C.ENDC} <dir>            Remove an empty directory
+  {C.OKCYAN}type{C.ENDC} <file>            Display file contents
+  {C.OKCYAN}echo{C.ENDC} [text]            Print text to stdout
+
+{C.OKGREEN}{C.BOLD}System:{C.ENDC}
+  {C.OKCYAN}clear{C.ENDC}                  Clear the screen
+  {C.OKCYAN}set{C.ENDC} VAR=value         Set an environment variable
+  {C.OKCYAN}env{C.ENDC} [VAR]             Show all (or one) environment variable(s)
+  {C.OKCYAN}history{C.ENDC}               Show command history
+  {C.OKCYAN}alias{C.ENDC} [name cmd]      Create/list aliases
+  {C.OKCYAN}unalias{C.ENDC} <name>        Remove an alias
+  {C.OKCYAN}help{C.ENDC}                  Show this help message
+  {C.OKCYAN}exit{C.ENDC}                  Exit the shell
+
+{C.OKGREEN}{C.BOLD}Operators:{C.ENDC}
+  {C.WARNING}|{C.ENDC}   pipe        Pipe output of one command to another
+  {C.WARNING}>{C.ENDC}   redirect    Write stdout to a file (overwrite)
+  {C.WARNING}>>{C.ENDC}  append      Append stdout to a file
+  {C.WARNING}<{C.ENDC}   input       Read stdin from a file
+  {C.WARNING}&{C.ENDC}   background  Run command in the background
+  {C.WARNING};{C.ENDC}   chain       Run multiple commands sequentially
+  {C.WARNING}$VAR{C.ENDC}            Expand an environment variable
+
+{C.OKGREEN}{C.BOLD}Examples:{C.ENDC}
+  $ echo Hello > file.txt          Write to file
+  $ cat file.txt >> log.txt        Append to file
+  $ ls | grep .py                  Pipe output through filter
+  $ cd /tmp                        Change directory
+  $ set MYVAR=hello                Set a variable
+  $ echo $MYVAR                    Expand a variable
+  $ sleep 5 &                      Run in background
+  $ echo a; echo b; echo c         Chain commands
+  $ alias ll ls -la                Create alias
+"""
+    print(help_text)
