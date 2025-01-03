@@ -197,3 +197,12 @@ def builtin_help() -> None:
   $ alias ll ls -la                Create alias
 """
     print(help_text)
+
+def builtin_ls(args: str) -> None:
+    """List directory contents (cross-platform)."""
+    is_windows = platform.system() == "Windows"
+    cmd = ("dir " if is_windows else "ls ") + args if args else ("dir" if is_windows else "ls")
+    try:
+        subprocess.run(cmd, shell=True)
+    except Exception as e:
+        print(f"{Colors.FAIL}✗ Error listing directory: {e}{Colors.ENDC}")
