@@ -206,3 +206,20 @@ def builtin_ls(args: str) -> None:
         subprocess.run(cmd, shell=True)
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error listing directory: {e}{Colors.ENDC}")
+
+def builtin_set(args: str) -> None:
+    """Set an environment variable: set VAR=value"""
+    if not args or "=" not in args:
+        print(f"{Colors.FAIL}✗ Usage: set VAR=value{Colors.ENDC}")
+        return
+    var_name, var_value = args.split("=", 1)
+    var_name  = var_name.strip()
+    var_value = var_value.strip()
+    if not var_name:
+        print(f"{Colors.FAIL}✗ Variable name cannot be empty{Colors.ENDC}")
+        return
+    try:
+        os.environ[var_name] = var_value
+        print(f"{Colors.OKGREEN}✓ Set {var_name}={var_value}{Colors.ENDC}")
+    except Exception as e:
+        print(f"{Colors.FAIL}✗ Error setting variable: {e}{Colors.ENDC}")
