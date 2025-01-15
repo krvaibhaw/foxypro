@@ -223,3 +223,14 @@ def builtin_set(args: str) -> None:
         print(f"{Colors.OKGREEN}✓ Set {var_name}={var_value}{Colors.ENDC}")
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error setting variable: {e}{Colors.ENDC}")
+
+def builtin_history() -> None:
+    """Display command history."""
+    if not command_history:
+        print(f"{Colors.WARNING}No command history yet{Colors.ENDC}")
+        return
+    print(f"\n{Colors.BOLD}{Colors.OKBLUE}Command History:{Colors.ENDC}")
+    print("-" * 60)
+    for i, cmd in enumerate(command_history, 1):
+        print(f"{Colors.OKCYAN}{i:4d}{Colors.ENDC}  {cmd}")
+    print("-" * 60)
