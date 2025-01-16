@@ -234,3 +234,17 @@ def builtin_history() -> None:
     for i, cmd in enumerate(command_history, 1):
         print(f"{Colors.OKCYAN}{i:4d}{Colors.ENDC}  {cmd}")
     print("-" * 60)
+
+def builtin_mkdir(args: str) -> None:
+    """Create a directory."""
+    if not args:
+        print(f"{Colors.FAIL}✗ Usage: mkdir <dirname>{Colors.ENDC}")
+        return
+    path = args.strip()
+    try:
+        os.mkdir(path)
+        print(f"{Colors.OKGREEN}✓ Created directory: {path}{Colors.ENDC}")
+    except FileExistsError:
+        print(f"{Colors.FAIL}✗ Directory already exists: {path}{Colors.ENDC}")
+    except Exception as e:
+        print(f"{Colors.FAIL}✗ Error: {e}{Colors.ENDC}")
