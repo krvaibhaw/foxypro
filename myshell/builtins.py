@@ -248,3 +248,19 @@ def builtin_mkdir(args: str) -> None:
         print(f"{Colors.FAIL}✗ Directory already exists: {path}{Colors.ENDC}")
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error: {e}{Colors.ENDC}")
+
+def builtin_rmdir(args: str) -> None:
+    """Remove an empty directory."""
+    if not args:
+        print(f"{Colors.FAIL}✗ Usage: rmdir <dirname>{Colors.ENDC}")
+        return
+    path = args.strip()
+    try:
+        os.rmdir(path)
+        print(f"{Colors.OKGREEN}✓ Removed directory: {path}{Colors.ENDC}")
+    except FileNotFoundError:
+        print(f"{Colors.FAIL}✗ Directory not found: {path}{Colors.ENDC}")
+    except OSError:
+        print(f"{Colors.FAIL}✗ Directory not empty or cannot be removed: {path}{Colors.ENDC}")
+    except Exception as e:
+        print(f"{Colors.FAIL}✗ Error: {e}{Colors.ENDC}")
