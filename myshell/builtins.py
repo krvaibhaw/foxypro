@@ -264,3 +264,20 @@ def builtin_rmdir(args: str) -> None:
         print(f"{Colors.FAIL}✗ Directory not empty or cannot be removed: {path}{Colors.ENDC}")
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error: {e}{Colors.ENDC}")
+
+
+def builtin_type(args: str) -> None:
+    """Display the contents of a file."""
+    if not args:
+        print(f"{Colors.FAIL}✗ Usage: type <filename>{Colors.ENDC}")
+        return
+    filepath = args.strip()
+    try:
+        with open(filepath, 'r') as f:
+            print(f.read(), end="")
+    except FileNotFoundError:
+        print(f"{Colors.FAIL}✗ File not found: {filepath}{Colors.ENDC}")
+    except IsADirectoryError:
+        print(f"{Colors.FAIL}✗ Is a directory: {filepath}{Colors.ENDC}")
+    except Exception as e:
+        print(f"{Colors.FAIL}✗ Error: {e}{Colors.ENDC}")
