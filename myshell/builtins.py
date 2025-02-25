@@ -281,3 +281,28 @@ def builtin_type(args: str) -> None:
         print(f"{Colors.FAIL}✗ Is a directory: {filepath}{Colors.ENDC}")
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error: {e}{Colors.ENDC}")
+
+def builtin_alias(args: str) -> None:
+    """Create or display aliases."""
+    if not args:
+        if not aliases:
+            print(f"{Colors.WARNING}No aliases defined{Colors.ENDC}")
+            return
+        print(f"\n{Colors.BOLD}{Colors.OKBLUE}Aliases:{Colors.ENDC}")
+        print("-" * 40)
+        for name, cmd in sorted(aliases.items()):
+            print(f"  {Colors.OKCYAN}{name:12}{Colors.ENDC}-> {cmd}")
+        print("-" * 40)
+    else:
+        parts = args.split(maxsplit=1)
+        if len(parts) < 2:
+            # Show a single alias if it exists
+            if parts[0] in aliases:
+                print(f"  {Colors.OKCYAN}{parts[0]:12}{Colors.ENDC}-> {aliases[parts[0]]}")
+            else:
+                print(f"{Colors.FAIL}✗ Usage: alias <name> <command>{Colors.ENDC}")
+            return
+        alias_name, alias_cmd = parts[0], parts[1]
+        aliases[alias_name] = alias_cmd
+        save_aliases()
+        print(f"{Colors.OKGREEN}✓ Alias created: {alias_name} -> {alias_cmd}{Colors.ENDC}")
