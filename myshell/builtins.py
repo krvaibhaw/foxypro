@@ -306,3 +306,16 @@ def builtin_alias(args: str) -> None:
         aliases[alias_name] = alias_cmd
         save_aliases()
         print(f"{Colors.OKGREEN}✓ Alias created: {alias_name} -> {alias_cmd}{Colors.ENDC}")
+
+def builtin_unalias(args: str) -> None:
+    """Remove a defined alias."""
+    if not args:
+        print(f"{Colors.FAIL}✗ Usage: unalias <name>{Colors.ENDC}")
+        return
+    alias_name = args.strip()
+    if alias_name in aliases:
+        del aliases[alias_name]
+        save_aliases()
+        print(f"{Colors.OKGREEN}✓ Alias removed: {alias_name}{Colors.ENDC}")
+    else:
+        print(f"{Colors.FAIL}✗ Alias not found: {alias_name}{Colors.ENDC}")
