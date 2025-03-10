@@ -6,6 +6,7 @@ import subprocess
 # Path where aliases are saved between sessions
 ALIAS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "aliases.json")
 
+
 # ── Colour codes ────────────────────────────────────────────────────────────
 
 class Colors:
@@ -18,6 +19,7 @@ class Colors:
     ENDC      = '\033[0m'
     BOLD      = '\033[1m'
     UNDERLINE = '\033[4m'
+
 
 # ── Mutable shell state ──────────────────────────────────────────────────────
 
@@ -56,6 +58,7 @@ def save_aliases() -> None:
     except Exception as e:
         print(f"{Colors.WARNING}⚠ Could not save aliases: {e}{Colors.ENDC}")
 
+
 # ── Built-in command names (aliases are also considered built-ins)
 BUILTINS = [
     'cd', 'pwd', 'echo', 'clear', 'help',
@@ -70,6 +73,7 @@ def add_to_history(command: str) -> None:
     """Append a non-empty command to the history list."""
     if command.strip():
         command_history.append(command.strip())
+
 
 # ── Dispatch helpers ─────────────────────────────────────────────────────────
 
@@ -115,6 +119,7 @@ def execute_builtin(command: str) -> None:
     else:
         print(f"Unknown built-in command: {cmd_name}")
 
+
 # ── Built-in implementations ─────────────────────────────────────────────────
 
 def builtin_cd(args: str) -> None:
@@ -136,6 +141,7 @@ def builtin_cd(args: str) -> None:
 def builtin_pwd() -> None:
     """Print the current working directory."""
     print(f"{Colors.OKBLUE}{os.getcwd()}{Colors.ENDC}")
+
 
 def builtin_echo(args: str) -> None:
     """Print text to stdout."""
@@ -198,6 +204,7 @@ def builtin_help() -> None:
 """
     print(help_text)
 
+
 def builtin_ls(args: str) -> None:
     """List directory contents (cross-platform)."""
     is_windows = platform.system() == "Windows"
@@ -206,6 +213,7 @@ def builtin_ls(args: str) -> None:
         subprocess.run(cmd, shell=True)
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error listing directory: {e}{Colors.ENDC}")
+
 
 def builtin_set(args: str) -> None:
     """Set an environment variable: set VAR=value"""
@@ -224,6 +232,7 @@ def builtin_set(args: str) -> None:
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error setting variable: {e}{Colors.ENDC}")
 
+
 def builtin_history() -> None:
     """Display command history."""
     if not command_history:
@@ -234,6 +243,7 @@ def builtin_history() -> None:
     for i, cmd in enumerate(command_history, 1):
         print(f"{Colors.OKCYAN}{i:4d}{Colors.ENDC}  {cmd}")
     print("-" * 60)
+
 
 def builtin_mkdir(args: str) -> None:
     """Create a directory."""
@@ -248,6 +258,7 @@ def builtin_mkdir(args: str) -> None:
         print(f"{Colors.FAIL}✗ Directory already exists: {path}{Colors.ENDC}")
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error: {e}{Colors.ENDC}")
+
 
 def builtin_rmdir(args: str) -> None:
     """Remove an empty directory."""
@@ -282,6 +293,7 @@ def builtin_type(args: str) -> None:
     except Exception as e:
         print(f"{Colors.FAIL}✗ Error: {e}{Colors.ENDC}")
 
+
 def builtin_alias(args: str) -> None:
     """Create or display aliases."""
     if not args:
@@ -307,6 +319,7 @@ def builtin_alias(args: str) -> None:
         save_aliases()
         print(f"{Colors.OKGREEN}✓ Alias created: {alias_name} -> {alias_cmd}{Colors.ENDC}")
 
+
 def builtin_unalias(args: str) -> None:
     """Remove a defined alias."""
     if not args:
@@ -319,3 +332,21 @@ def builtin_unalias(args: str) -> None:
         print(f"{Colors.OKGREEN}✓ Alias removed: {alias_name}{Colors.ENDC}")
     else:
         print(f"{Colors.FAIL}✗ Alias not found: {alias_name}{Colors.ENDC}")
+
+
+def builtin_env(args: str) -> None:
+    """Display environment variables (all or a specific one)."""
+    if not args:
+        print(f"\n{Colors.BOLD}{Colors.OKBLUE}Environment Variables:{Colors.ENDC}")
+        print("-" * 80)
+        for key in sorted(os.environ.keys()):
+            value = os.environ[key]
+            display = value[:60] + "…" if len(value) > 60 else value
+            print(f"  {Colors.OKCYAN}{key:25}{Colors.ENDC}= {display}")
+        print("-" * 80)
+    else:
+        var_name = args.strip()
+        if var_name in os.environ:
+            print(f"{Colors.OKCYAN}{var_name}{Colors.ENDC} = {os.environ[var_name]}")
+        else:
+            print(f"{Colors.FAIL}✗ Variable not found: {var_name}{Colors.ENDC}")
