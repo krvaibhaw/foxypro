@@ -23,3 +23,20 @@ A lightweight, cross-platform interactive shell built entirely in Python with ze
 | Zero dependencies | Standard library only: `os`, `re`, `json`, `subprocess`, `platform` |
 
 ---
+
+## Project Structure
+
+```
+foxypro/
+├── bin/
+│   └── main.py              # Entry point — run this file to start the shell
+└── myshell/
+    ├── __init__.py          # Python package marker
+    ├── aliases.json         # Auto-generated on first alias save; persists aliases
+    ├── background.py        # Handles background process execution (&)
+    ├── builtins.py          # All built-in command implementations + alias persistence
+    ├── core.py              # Main loop, command processing pipeline, variable expansion
+    ├── redirection.py       # Piping, output redirection, input redirection
+    ├── utils.py             # parse_command() — strips & flag, returns (background, cmd)
+    └── validation.py        # Pre-execution syntax validation
+```
