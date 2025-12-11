@@ -49,3 +49,14 @@ foxypro/
 
 **`myshell/builtins.py`** — Implements every built-in command as a standalone function (`builtin_cd`, `builtin_echo`, `builtin_alias`, etc.). Also owns the `aliases` dict (the live in-memory alias table), `command_history` list, and the `load_aliases()` / `save_aliases()` persistence functions.
 
+**`myshell/redirection.py`** — Handles everything involving `|`, `>`, `>>`, and `<`. Uses `subprocess.Popen` chains for multi-stage pipes so stdout of each process is correctly wired to stdin of the next. Checks `>>` before `>` to avoid the common operator-matching bug.
+
+**`myshell/background.py`** — Launches a command with `subprocess.Popen` (no `wait()`) and immediately prints the PID, returning control to the shell.
+
+**`myshell/validation.py`** — Runs before any command executes. Checks for mismatched quotes, the invalid `|>` operator, empty pipe segments, and dangling redirection operators with no filename.
+
+**`myshell/utils.py`** — Single function `parse_command()` that detects a trailing `&` and returns `(True, command_without_ampersand)` or `(False, command)`.
+
+**`myshell/aliases.json`** — Plain JSON file, auto-created on the first `alias` or `unalias` call. Merge-loaded on startup so default aliases are always present even if the file predates them.
+
+---
