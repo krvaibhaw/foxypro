@@ -60,3 +60,15 @@ foxypro/
 **`myshell/aliases.json`** — Plain JSON file, auto-created on the first `alias` or `unalias` call. Merge-loaded on startup so default aliases are always present even if the file predates them.
 
 ---
+
+## Architecture Overview
+
+```
+bin/main.py
+    └── core.main_loop()
+            │
+            ├── load_aliases()              ← restore from aliases.json on startup
+            │
+            └── REPL loop
+                    │
+                    ├── input(f"{cwd}$ ")
