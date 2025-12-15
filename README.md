@@ -72,3 +72,12 @@ bin/main.py
             └── REPL loop
                     │
                     ├── input(f"{cwd}$ ")
+                    │
+                    └── process_command(user_input)
+                            │
+                            ├── 1. validate_command()     ← syntax check
+                            ├── 2. expand_variables()     ← $VAR substitution
+                            ├── 3. add_to_history()       ← record command
+                            ├── 4. _split_on_semicolons() ← handle ; chaining
+                            │
+                            └── process_single_command()
