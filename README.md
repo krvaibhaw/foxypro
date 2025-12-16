@@ -81,3 +81,11 @@ bin/main.py
                             ├── 4. _split_on_semicolons() ← handle ; chaining
                             │
                             └── process_single_command()
+                                    │
+                                    ├── parse_command()       ← detect & flag
+                                    │
+                                    ├── is_builtin() && no operators
+                                    │       └── execute_builtin()
+                                    │
+                                    ├── background == True
+                                    │       └── handle_background()
