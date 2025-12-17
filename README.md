@@ -89,3 +89,11 @@ bin/main.py
                                     │
                                     ├── background == True
                                     │       └── handle_background()
+                                    │
+                                    └── else
+                                            └── handle_redirection()
+                                                    ├── handle_pipe()
+                                                    ├── handle_write_redirect()
+                                                    ├── handle_append_redirect()
+                                                    ├── handle_input_redirect()
+                                                    └── run_simple()
