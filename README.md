@@ -97,3 +97,4 @@ bin/main.py
                                                     ├── handle_append_redirect()
                                                     ├── handle_input_redirect()
                                                     └── run_simple()
+```
