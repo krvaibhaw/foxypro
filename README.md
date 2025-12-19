@@ -98,3 +98,19 @@ bin/main.py
                                                     ├── handle_input_redirect()
                                                     └── run_simple()
 ```
+
+## Requirements
+
+- Python **3.10 or higher** (uses `list[str]` type hints which require 3.9+, and `match` style patterns internally)
+- No pip installs, no virtual environment needed
+- Works on Windows 10/11, macOS 10.15+, Ubuntu 20.04+
+
+Verify your Python version:
+
+```bash
+python --version
+# or
+python3 --version
+```
+
+---
