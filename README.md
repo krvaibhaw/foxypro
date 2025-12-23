@@ -114,3 +114,12 @@ python3 --version
 ```
 
 ---
+
+## Installation
+
+**Option 1 — Clone with git:**
+
+```bash
+git clone https://github.com/yourname/foxypro.git
+cd foxypro
+```
