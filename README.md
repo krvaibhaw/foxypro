@@ -123,3 +123,11 @@ python3 --version
 git clone https://github.com/yourname/foxypro.git
 cd foxypro
 ```
+
+**Option 2 — Download ZIP:**
+
+Download and extract the project folder, then open a terminal inside the `foxypro/` directory.
+
+No `pip install` step is required.
+
+---
