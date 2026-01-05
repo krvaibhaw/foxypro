@@ -131,3 +131,30 @@ Download and extract the project folder, then open a terminal inside the `foxypr
 No `pip install` step is required.
 
 ---
+
+## Getting Started
+
+Start the shell from inside the `foxypro/` directory:
+
+```bash
+python bin/main.py
+```
+
+You will see the ASCII banner followed by the shell prompt:
+
+```
+ ********
+/**/////                    **   ** ******
+/**        ******  **   ** //** ** /**///**  ******  ******
+/*******  **////**//** **   //***  /**  /**//**//* **////**
+/**////  /**   /** //***     /**   /******  /** / /**   /**
+/**      /**   /**  **/**    **    /**///   /**   /**   /**
+/**      //******  ** //**  **     /**     /***   //******
+//        //////  //   //  //      //      ///     //////
+
+============================================================
+  Welcome to Foxypro Shell  |  type 'help' to get started
+============================================================
+
+/home/yourname$
+```
