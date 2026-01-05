@@ -156,5 +156,5 @@ You will see the ASCII banner followed by the shell prompt:
   Welcome to Foxypro Shell  |  type 'help' to get started
 ============================================================
 
-/home/yourname
+/home/yourname$
 ```
