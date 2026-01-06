@@ -158,3 +158,9 @@ You will see the ASCII banner followed by the shell prompt:
 
 /home/yourname$
 ```
+
+The prompt always shows your **current working directory** followed by `$`.
+
+Type `help` to see the full command reference, or `exit` to quit.
+
+---
