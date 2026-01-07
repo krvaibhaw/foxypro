@@ -164,3 +164,13 @@ The prompt always shows your **current working directory** followed by `$`.
 Type `help` to see the full command reference, or `exit` to quit.
 
 ---
+
+## How a Command Gets Executed
+
+Understanding the execution pipeline helps when debugging unexpected behaviour.
+
+**1. Validation** (`validation.py`)
+The raw input is checked for syntax errors before anything runs. If validation fails, an error is printed and execution stops — the command never reaches the shell or OS.
+
+**2. Variable expansion** (`core.py → expand_variables`)
+All `$VAR` and `${VAR}` tokens are replaced with their current values from `os.environ`. If a variable is not set, it expands to an empty string. Expansion happens on the whole command string before splitting.
