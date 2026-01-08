@@ -174,3 +174,9 @@ The raw input is checked for syntax errors before anything runs. If validation f
 
 **2. Variable expansion** (`core.py → expand_variables`)
 All `$VAR` and `${VAR}` tokens are replaced with their current values from `os.environ`. If a variable is not set, it expands to an empty string. Expansion happens on the whole command string before splitting.
+
+**3. History recording** (`builtins.py → add_to_history`)
+The expanded command is appended to the in-memory `command_history` list.
+
+**4. Semicolon splitting** (`core.py → _split_on_semicolons`)
+If the command contains `;`, it is split into individual sub-commands. The splitter is quote-aware — a `;` inside `"..."` or `'...'` is not treated as a separator. Each sub-command is then processed independently through steps 5–7.
