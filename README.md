@@ -180,3 +180,8 @@ The expanded command is appended to the in-memory `command_history` list.
 
 **4. Semicolon splitting** (`core.py → _split_on_semicolons`)
 If the command contains `;`, it is split into individual sub-commands. The splitter is quote-aware — a `;` inside `"..."` or `'...'` is not treated as a separator. Each sub-command is then processed independently through steps 5–7.
+
+**5. Background flag detection** (`utils.py → parse_command`)
+If the command ends with `&`, `background=True` is returned and the `&` is stripped from the command string.
+
+**6. Routing decision** (`core.py → process_single_command`)
