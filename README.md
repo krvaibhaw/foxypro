@@ -185,3 +185,7 @@ If the command contains `;`, it is split into individual sub-commands. The split
 If the command ends with `&`, `background=True` is returned and the `&` is stripped from the command string.
 
 **6. Routing decision** (`core.py → process_single_command`)
+Three possible routes:
+- **Built-in, no operators** → `execute_builtin()` in `builtins.py`
+- **Background** → `handle_background()` in `background.py`
+- **Everything else** (external commands, redirection, pipes) → `handle_redirection()` in `redirection.py`
