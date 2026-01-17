@@ -189,3 +189,5 @@ Three possible routes:
 - **Built-in, no operators** → `execute_builtin()` in `builtins.py`
 - **Background** → `handle_background()` in `background.py`
 - **Everything else** (external commands, redirection, pipes) → `handle_redirection()` in `redirection.py`
+
+> **Why built-ins with operators go to `handle_redirection`:** A command like `echo hello >> file.txt` starts with `echo` which is a built-in — but it has a `>>` operator. If it were routed to `execute_builtin`, it would print `hello >> file.txt` literally. The check `is_builtin() and not _has_redirection_or_pipe()` ensures that any built-in command containing an operator is passed to the system shell via `handle_redirection`, which handles the operator correctly.
