@@ -191,3 +191,10 @@ Three possible routes:
 - **Everything else** (external commands, redirection, pipes) → `handle_redirection()` in `redirection.py`
 
 > **Why built-ins with operators go to `handle_redirection`:** A command like `echo hello >> file.txt` starts with `echo` which is a built-in — but it has a `>>` operator. If it were routed to `execute_builtin`, it would print `hello >> file.txt` literally. The check `is_builtin() and not _has_redirection_or_pipe()` ensures that any built-in command containing an operator is passed to the system shell via `handle_redirection`, which handles the operator correctly.
+
+**7. Execution**
+- `handle_background` — calls `subprocess.Popen` without waiting, prints the PID
+- `handle_redirection` — dispatches to the correct handler (`>>` checked before `>` to avoid substring matching bugs), uses `subprocess.Popen` chains for pipes
+- `execute_builtin` — calls the matching `builtin_*` function directly in Python
+
+---
