@@ -198,3 +198,20 @@ Three possible routes:
 - `execute_builtin` — calls the matching `builtin_*` function directly in Python
 
 ---
+
+# Built-in Commands
+
+### Navigation
+
+#### `cd [path]`
+Change the current working directory. With no argument, changes to the home directory (`~`).
+
+```bash
+cd /tmp              # go to /tmp
+cd projects/myapp    # relative path
+cd ..                # go up one level
+cd                   # go to home directory
+cd ~                 # also home directory
+```
+
+Errors handled: directory not found, not a directory, permission denied.
