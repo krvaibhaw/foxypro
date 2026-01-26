@@ -215,3 +215,13 @@ cd ~                 # also home directory
 ```
 
 Errors handled: directory not found, not a directory, permission denied.
+
+#### `pwd`
+Print the full absolute path of the current working directory.
+
+```bash
+pwd
+# /home/yourname/projects/foxypro
+```
+
+---
