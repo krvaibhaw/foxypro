@@ -225,3 +225,22 @@ pwd
 ```
 
 ---
+
+### File Operations
+
+#### `ls [path]` / `dir [path]`
+List the contents of a directory. Both `ls` and `dir` are accepted. On Windows the underlying command is `dir`; on Unix it is `ls`.
+
+```bash
+ls                   # list current directory
+ls /tmp              # list specific directory
+dir                  # same as ls
+```
+
+#### `mkdir <name>`
+Create a new directory. Fails with a clear message if the directory already exists.
+
+```bash
+mkdir output
+mkdir /tmp/testfolder
+```
