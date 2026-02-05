@@ -244,3 +244,32 @@ Create a new directory. Fails with a clear message if the directory already exis
 mkdir output
 mkdir /tmp/testfolder
 ```
+
+#### `rmdir <name>`
+Remove a directory. Only works on **empty** directories. Fails with a message if the directory contains files.
+
+```bash
+rmdir output
+rmdir /tmp/testfolder
+```
+
+#### `type <filename>`
+Print the contents of a text file to stdout. Similar to Unix `cat` or Windows `type`.
+
+```bash
+type notes.txt
+type /etc/hostname
+```
+
+Errors handled: file not found, is a directory.
+
+#### `echo [text]`
+Print text to stdout. With no argument, prints a blank line. Commonly used with redirection operators.
+
+```bash
+echo Hello World
+echo "Spaces   are   preserved"
+echo                 # blank line
+echo line one > file.txt
+echo line two >> file.txt
+```
