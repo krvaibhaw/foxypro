@@ -273,3 +273,22 @@ echo                 # blank line
 echo line one > file.txt
 echo line two >> file.txt
 ```
+
+---
+
+### System
+
+#### `clear`
+Clear the terminal screen. Uses `cls` on Windows and `clear` on Unix.
+
+#### `set VAR=value`
+Set an environment variable for the current session. The variable is available immediately for `$VAR` expansion and is visible to any child processes launched from the shell.
+
+```bash
+set NAME=Alice
+set DEBUG=true
+set PATH_PREFIX=/usr/local
+echo Hello $NAME
+```
+
+Variables set this way do not persist after the shell exits. Use your OS's profile file (`.bashrc`, `.zshrc`, `System Properties`) for permanent variables.
