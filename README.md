@@ -292,3 +292,18 @@ echo Hello $NAME
 ```
 
 Variables set this way do not persist after the shell exits. Use your OS's profile file (`.bashrc`, `.zshrc`, `System Properties`) for permanent variables.
+#### `env [VAR]`
+Display environment variables. With no argument, lists all variables sorted alphabetically with values truncated at 60 characters. With an argument, shows just that one variable.
+
+```bash
+env                  # show all variables
+env HOME             # show just HOME
+env NAME             # show a variable you set with 'set'
+```
+
+#### `history`
+Show all commands entered in the current session, numbered from 1.
+
+```bash
+history
+```
