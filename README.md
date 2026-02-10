@@ -307,3 +307,11 @@ Show all commands entered in the current session, numbered from 1.
 ```bash
 history
 ```
+
+#### `help`
+Display the full built-in command reference with color formatting.
+
+#### `exit`
+Save aliases to disk and exit the shell gracefully. Also triggered by Ctrl-D (EOF).
+
+---
