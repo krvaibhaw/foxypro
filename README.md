@@ -315,3 +315,46 @@ Display the full built-in command reference with color formatting.
 Save aliases to disk and exit the shell gracefully. Also triggered by Ctrl-D (EOF).
 
 ---
+
+
+### Aliases
+
+Aliases let you define short names for longer commands. They are stored in memory and also persisted to `myshell/aliases.json` so they survive restarts.
+
+#### `alias`
+List all currently defined aliases.
+
+```bash
+alias
+# Aliases:
+# ----------------------------------------
+#   l           -> ls
+#   ll          -> ls -la
+#   greet       -> echo Hello
+# ----------------------------------------
+```
+
+#### `alias <name> <command>`
+Create a new alias. The command can be anything — including commands with arguments.
+
+```bash
+alias greet echo Hello
+alias lspy ls | grep .py
+alias myip curl ifconfig.me
+alias back cd ..
+```
+
+#### `alias <name>`
+Show the definition of a single alias.
+
+```bash
+alias greet
+#   greet       -> echo Hello
+```
+
+#### `unalias <name>`
+Remove an alias permanently (also updates `aliases.json`).
+
+```bash
+unalias greet
+```
