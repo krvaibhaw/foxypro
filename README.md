@@ -358,3 +358,30 @@ Remove an alias permanently (also updates `aliases.json`).
 ```bash
 unalias greet
 ```
+
+**Alias chaining:** Aliases can resolve to other aliases. If `h` is aliased to `history` and `history` is a built-in, running `h` works correctly because `execute_builtin` recursively resolves aliases.
+
+---
+
+## Operators & Special Syntax
+
+### Pipe `|`
+
+Connects the stdout of one command to the stdin of the next. Foxypro builds a proper `Popen` chain — each process starts before the previous one finishes, so output streams correctly even for large outputs.
+
+```bash
+ls | grep .py
+ls | grep .txt | cat
+echo "hello world" | cat
+ps aux | grep python
+```
+
+Multi-stage pipes work by iterating through the pipe segments, setting each process's `stdout=PIPE` (except the last) and `stdin=prev_stdout`. The parent process closes each intermediate stdout handle after handing it to the next child, so EOF propagates correctly.
+
+**Validation:** Empty pipe segments are caught before execution:
+```bash
+ls |  | grep .py    # Error: Pipe operator has an empty command segment
+ls |>  file.txt     # Error: Invalid operator: |>
+```
+
+---
