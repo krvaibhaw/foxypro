@@ -385,3 +385,33 @@ ls |>  file.txt     # Error: Invalid operator: |>
 ```
 
 ---
+
+### Output Redirection `>`
+
+Writes the stdout of a command to a file. **Overwrites** the file if it already exists, creates it if it does not.
+
+```bash
+echo Hello > greeting.txt
+ls > filelist.txt
+pwd > location.txt
+```
+
+> **Important:** `>` checks `>>` first internally to avoid the substring-matching bug where `>` would match inside `>>`.
+
+---
+
+### Append Redirection `>>`
+
+Appends the stdout of a command to a file. Creates the file if it does not exist.
+
+```bash
+echo line one > log.txt
+echo line two >> log.txt
+echo line three >> log.txt
+type log.txt
+# line one
+# line two
+# line three
+```
+
+---
