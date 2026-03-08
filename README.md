@@ -415,3 +415,13 @@ type log.txt
 ```
 
 ---
+
+### Input Redirection `<`
+
+Feeds the contents of a file as stdin to a command.
+
+```bash
+cat < notes.txt
+sort < unsorted.txt
+grep hello < bigfile.txt
+```
