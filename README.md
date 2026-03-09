@@ -425,3 +425,20 @@ cat < notes.txt
 sort < unsorted.txt
 grep hello < bigfile.txt
 ```
+
+---
+
+### Background Execution `&`
+
+Append `&` to any command to run it in the background. The shell prints the process PID and immediately returns the prompt.
+
+```bash
+sleep 10 &
+# Started process 12345 in background
+
+echo still responsive    # runs immediately
+```
+
+Background processes are fully detached — the shell does not wait for them or track their exit code. Use your OS's process tools (`ps`, `Task Manager`) to monitor them.
+
+---
