@@ -442,3 +442,24 @@ echo still responsive    # runs immediately
 Background processes are fully detached — the shell does not wait for them or track their exit code. Use your OS's process tools (`ps`, `Task Manager`) to monitor them.
 
 ---
+
+### Command Chaining `;`
+
+Run multiple commands on one line, in order. Each command runs regardless of whether the previous one succeeded or failed.
+
+```bash
+echo one; echo two; echo three
+
+mkdir demo; cd demo; pwd; cd ..; rmdir demo
+
+set X=10; echo $X; set X=20; echo $X
+```
+
+**Quote awareness:** Semicolons inside quoted strings are not treated as separators:
+
+```bash
+echo "hello; world"      # prints: hello; world  (not split)
+echo 'a;b;c'             # prints: a;b;c  (not split)
+```
+
+---
