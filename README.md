@@ -463,3 +463,14 @@ echo 'a;b;c'             # prints: a;b;c  (not split)
 ```
 
 ---
+
+### Variable Expansion `$VAR`
+
+Environment variables are expanded before a command executes. Two syntaxes are supported:
+
+```bash
+set CITY=London
+echo $CITY           # London
+echo ${CITY}         # London  (brace syntax — safer in compound strings)
+echo ${CITY}Bridge   # LondonBridge
+```
