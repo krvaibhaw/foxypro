@@ -474,3 +474,12 @@ echo $CITY           # London
 echo ${CITY}         # London  (brace syntax — safer in compound strings)
 echo ${CITY}Bridge   # LondonBridge
 ```
+If a variable is not set, it expands to an empty string (no error):
+
+```bash
+echo $NOTSET         # prints a blank line
+```
+
+Expansion uses a regex substitution (`re.sub`) that processes `${VAR}` before `$VAR` to avoid partial matches in compound expressions.
+
+---
