@@ -489,3 +489,6 @@ Expansion uses a regex substitution (`re.sub`) that processes `${VAR}` before `$
 ### How Persistence Works
 
 Every time you run `alias <name> <cmd>` or `unalias <name>`, the full `aliases` dict is immediately serialized to `myshell/aliases.json` using `json.dump`. This means aliases are safe even if the shell crashes — the file is always up to date.
+On startup, `load_aliases()` reads the file and calls `aliases.update(saved)`. Using `update` rather than replacing the dict means the hardcoded defaults are preserved even if the file was created by an older version that didn't include them.
+
+Aliases are also saved on clean exit (`exit` command or Ctrl-D) as a final flush.
