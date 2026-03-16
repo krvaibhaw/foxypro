@@ -483,3 +483,9 @@ echo $NOTSET         # prints a blank line
 Expansion uses a regex substitution (`re.sub`) that processes `${VAR}` before `$VAR` to avoid partial matches in compound expressions.
 
 ---
+
+## Persistent Aliases
+
+### How Persistence Works
+
+Every time you run `alias <name> <cmd>` or `unalias <name>`, the full `aliases` dict is immediately serialized to `myshell/aliases.json` using `json.dump`. This means aliases are safe even if the shell crashes — the file is always up to date.
