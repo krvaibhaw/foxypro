@@ -493,3 +493,22 @@ Every time you run `alias <name> <cmd>` or `unalias <name>`, the full `aliases` 
 On startup, `load_aliases()` reads the file and calls `aliases.update(saved)`. Using `update` rather than replacing the dict means the hardcoded defaults are preserved even if the file was created by an older version that didn't include them.
 
 Aliases are also saved on clean exit (`exit` command or Ctrl-D) as a final flush.
+
+**Lifecycle:**
+
+```
+Startup
+  └── load_aliases()
+        └── aliases.update({ ...saved from disk... })
+
+User runs: alias greet echo Hello
+  └── aliases['greet'] = 'echo Hello'
+  └── save_aliases()   ← writes aliases.json immediately
+
+User runs: unalias greet
+  └── del aliases['greet']
+
+User types: exit
+  └── save_aliases()   ← final flush
+  └── print("Goodbye!")
+```
