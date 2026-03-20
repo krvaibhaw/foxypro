@@ -507,6 +507,7 @@ User runs: alias greet echo Hello
 
 User runs: unalias greet
   └── del aliases['greet']
+  └── save_aliases()   ← writes aliases.json immediately
 
 User types: exit
   └── save_aliases()   ← final flush
