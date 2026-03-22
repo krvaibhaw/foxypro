@@ -513,3 +513,17 @@ User types: exit
   └── save_aliases()   ← final flush
   └── print("Goodbye!")
 ```
+
+### Default Aliases
+
+These are built into `builtins.py` and are always available, even before `aliases.json` exists:
+
+| Alias | Expands to | Notes |
+|---|---|---|
+| `l` | `ls` | Quick directory listing |
+| `ll` | `ls -la` | Detailed listing with hidden files |
+| `cls` | `clear` | Windows-style clear |
+| `p` | `pwd` | Quick working directory |
+| `h` | `history` | Quick history |
+| `mk` | `mkdir` | Quick make directory |
+| `rm` | `rmdir` | Quick remove directory |
