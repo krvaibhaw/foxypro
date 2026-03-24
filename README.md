@@ -527,3 +527,23 @@ These are built into `builtins.py` and are always available, even before `aliase
 | `h` | `history` | Quick history |
 | `mk` | `mkdir` | Quick make directory |
 | `rm` | `rmdir` | Quick remove directory |
+
+
+### Manually Editing aliases.json
+
+The file is plain JSON located at `myshell/aliases.json`. You can edit it directly in any text editor:
+
+```json
+{
+  "l": "ls",
+  "ll": "ls -la",
+  "cls": "clear",
+  "p": "pwd",
+  "h": "history",
+  "mk": "mkdir",
+  "rm": "rmdir",
+  "greet": "echo Hello",
+  "lspy": "ls | grep .py",
+  "back": "cd .."
+}
+```
