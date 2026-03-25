@@ -547,3 +547,6 @@ The file is plain JSON located at `myshell/aliases.json`. You can edit it direct
   "back": "cd .."
 }
 ```
+Changes take effect the next time the shell starts. If the file contains invalid JSON the shell will print a warning and continue with just the default aliases.
+
+---
