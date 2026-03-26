@@ -550,3 +550,23 @@ The file is plain JSON located at `myshell/aliases.json`. You can edit it direct
 Changes take effect the next time the shell starts. If the file contains invalid JSON the shell will print a warning and continue with just the default aliases.
 
 ---
+
+## Environment Variables
+
+Variables set with `set` are written to `os.environ`, making them available to all child processes (external commands, background processes, piped commands) launched from the shell in that session.
+
+```bash
+set API_URL=https://api.example.com
+set DEBUG=1
+set MAX_RETRIES=3
+
+echo $API_URL
+curl $API_URL/health         # external command uses the variable
+```
+
+Variables do **not** persist after the shell exits. They are session-scoped only.
+
+**Show all variables:**
+```bash
+env
+```
