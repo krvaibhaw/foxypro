@@ -570,3 +570,12 @@ Variables do **not** persist after the shell exits. They are session-scoped only
 ```bash
 env
 ```
+
+**Show one variable:**
+```bash
+env HOME
+env PATH
+env API_URL
+```
+
+---
