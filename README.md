@@ -579,3 +579,22 @@ env API_URL
 ```
 
 ---
+
+## Command Validation
+
+Foxypro validates every command before executing it. Errors are printed in red and the command is not run.
+
+| Check | Example that fails | Error message |
+|---|---|---|
+| Empty command | *(just pressing Enter)* | `Empty command` |
+| Mismatched double quotes | `echo "bad` | `Mismatched double quotes` |
+| Mismatched single quotes | `echo 'bad` | `Mismatched single quotes` |
+| Invalid operator | `cmd \|> file` | `Invalid operator: \|>` |
+| Empty pipe segment | `ls \|  \| grep x` | `Pipe operator has an empty command segment` |
+| Dangling `>` | `echo hi >` | `Redirection operator has no target filename` |
+| Dangling `>` | `echo hi >` | `Redirection operator has no target filename` |
+| Dangling `<` | `cat <` | `Input redirection has no source filename` |
+
+Escaped quotes (`\"`, `\'`) are not counted as quote openers/closers, so they don't trigger false positives.
+
+---
