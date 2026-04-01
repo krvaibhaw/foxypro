@@ -596,5 +596,6 @@ Foxypro validates every command before executing it. Errors are printed in red a
 | Dangling `<` | `cat <` | `Input redirection has no source filename` |
 
 Escaped quotes (`\"`, `\'`) are not counted as quote openers/closers, so they don't trigger false positives.
-
+ 
+ 
 ---
