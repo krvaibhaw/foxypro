@@ -592,7 +592,7 @@ Foxypro validates every command before executing it. Errors are printed in red a
 | Invalid operator | `cmd \|> file` | `Invalid operator: \|>` |
 | Empty pipe segment | `ls \|  \| grep x` | `Pipe operator has an empty command segment` |
 | Dangling `>` | `echo hi >` | `Redirection operator has no target filename` |
-| Dangling `>` | `echo hi >` | `Redirection operator has no target filename` |
+| Dangling `>>` | `echo hi >>` | `Redirection operator has no target filename` |
 | Dangling `<` | `cat <` | `Input redirection has no source filename` |
 
 Escaped quotes (`\"`, `\'`) are not counted as quote openers/closers, so they don't trigger false positives.
