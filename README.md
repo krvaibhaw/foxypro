@@ -597,5 +597,35 @@ Foxypro validates every command before executing it. Errors are printed in red a
 
 Escaped quotes (`\"`, `\'`) are not counted as quote openers/closers, so they don't trigger false positives.
  
- 
+
+---
+
+## Command History
+
+All commands entered in the current session are recorded in an in-memory list. View them with:
+
+```bash
+history
+```
+
+Output:
+
+```
+Command History:
+------------------------------------------------------------
+   1  pwd
+   2  ls
+   3  set NAME=Alice
+   4  echo Hello $NAME
+   5  mkdir demo
+   6  cd demo
+   7  pwd
+   8  cd ..
+   9  rmdir demo
+  10  history
+------------------------------------------------------------
+```
+
+History records the **expanded** form of commands (after `$VAR` substitution). History is session-only and resets on exit.
+
 ---
