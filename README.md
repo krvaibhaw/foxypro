@@ -629,3 +629,25 @@ Command History:
 History records the **expanded** form of commands (after `$VAR` substitution). History is session-only and resets on exit.
 
 ---
+
+## Color Output
+
+Foxypro uses ANSI escape codes for colored terminal output. Colors are defined in the `Colors` class in `builtins.py`:
+
+| Color | Used for |
+|---|---|
+| Green (`\033[92m`) | Success messages (✓ Created, ✓ Set, ✓ Alias created) |
+| Red (`\033[91m`) | Error messages (✗ not found, ✗ failed) |
+| Yellow (`\033[93m`) | Warnings (no history, no aliases) |
+| Cyan (`\033[96m`) | Values, names, highlighted items |
+| Blue (`\033[94m`) | `pwd` output, section headers |
+| Bold (`\033[1m`) | Section headings in `help` and `history` |
+
+Colors are applied through format strings like:
+```python
+print(f"{Colors.OKGREEN}✓ Created directory: {path}{Colors.ENDC}")
+```
+
+`Colors.ENDC` (`\033[0m`) resets all formatting after each colored segment.
+
+---
