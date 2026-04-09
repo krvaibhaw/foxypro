@@ -651,3 +651,16 @@ print(f"{Colors.OKGREEN}✓ Created directory: {path}{Colors.ENDC}")
 `Colors.ENDC` (`\033[0m`) resets all formatting after each colored segment.
 
 ---
+
+## Error Handling
+
+Foxypro handles errors at every layer without crashing:
+
+- **Validation errors** — printed before execution, command is skipped
+- **Built-in errors** — caught per-function with specific messages (`FileNotFoundError`, `PermissionError`, `OSError`)
+- **Subprocess errors** — `CalledProcessError` is caught and the exit code is reported
+- **KeyboardInterrupt (Ctrl-C)** — cancels the current input line, returns to prompt
+- **EOFError (Ctrl-D)** — saves aliases and exits gracefully
+- **Unexpected exceptions** — caught at the top level of `main_loop` and printed without crashing the shell
+
+---
