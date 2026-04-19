@@ -664,3 +664,17 @@ Foxypro handles errors at every layer without crashing:
 - **Unexpected exceptions** — caught at the top level of `main_loop` and printed without crashing the shell
 
 ---
+
+## Platform Behaviour
+
+| Feature | Windows | macOS / Linux |
+|---|---|---|
+| `ls` / `dir` | Runs `dir` | Runs `ls` |
+| `clear` | Runs `cls` | Runs `clear` |
+| `cd` with no args | Goes to `%USERPROFILE%` | Goes to `~` |
+| Subprocess shell | `shell=True` (required on Windows) | `shell=True` |
+| Background (`&`) | Supported via `Popen` | Supported via `Popen` |
+| Pipes | Supported via `Popen` chain | Supported via `Popen` chain |
+| `aliases.json` path | `myshell\aliases.json` | `myshell/aliases.json` |
+
+---
