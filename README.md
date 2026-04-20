@@ -678,3 +678,13 @@ Foxypro handles errors at every layer without crashing:
 | `aliases.json` path | `myshell\aliases.json` | `myshell/aliases.json` |
 
 ---
+
+## Practical Examples
+
+**Build a project log:**
+```bash
+echo Build started > build.log
+echo Compiling... >> build.log
+echo Done >> build.log
+type build.log
+```
