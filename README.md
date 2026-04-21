@@ -688,3 +688,21 @@ echo Compiling... >> build.log
 echo Done >> build.log
 type build.log
 ```
+
+**Find Python files:**
+```bash
+ls | grep .py
+```
+
+**Set up a working environment:**
+```bash
+set PROJECT=myapp
+set ENV=development
+echo Starting $PROJECT in $ENV mode
+cd $PROJECT
+```
+
+**Create a directory structure:**
+```bash
+mkdir src; mkdir tests; mkdir docs; ls
+```
