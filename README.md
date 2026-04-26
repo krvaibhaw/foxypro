@@ -706,3 +706,22 @@ cd $PROJECT
 ```bash
 mkdir src; mkdir tests; mkdir docs; ls
 ```
+
+**Run a slow command without blocking:**
+```bash
+python long_script.py &
+echo Script is running in background, PID printed above
+```
+
+**Create and use multiple aliases:**
+```bash
+alias pyfiles ls | grep .py
+alias goback cd ..
+alias here pwd
+alias show type
+
+pyfiles          # list .py files
+here             # show where you are
+show notes.txt   # read a file
+goback           # go up a level
+```
