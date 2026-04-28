@@ -725,3 +725,10 @@ here             # show where you are
 show notes.txt   # read a file
 goback           # go up a level
 ```
+
+**Chain a full workflow:**
+```bash
+mkdir output; echo Hello > output/hello.txt; echo World >> output/hello.txt; type output/hello.txt
+```
+
+---
