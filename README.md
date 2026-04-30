@@ -732,3 +732,32 @@ mkdir output; echo Hello > output/hello.txt; echo World >> output/hello.txt; typ
 ```
 
 ---
+
+## Module Reference
+
+### `core.py`
+
+| Function | Signature | Description |
+|---|---|---|
+| `main_loop` | `() → None` | Starts the REPL. Loads aliases, runs input loop, handles Ctrl-C / Ctrl-D |
+| `process_command` | `(command: str) → None` | Full pipeline: validate → expand → history → chain → dispatch |
+| `process_single_command` | `(command: str) → None` | Routes one command to builtin / background / redirection |
+| `expand_variables` | `(command: str) → str` | Replaces `$VAR` / `${VAR}` with `os.environ` values |
+| `_split_on_semicolons` | `(command: str) → list[str]` | Quote-aware split on `;` |
+| `_has_redirection_or_pipe` | `(command: str) → bool` | Returns True if `\|`, `>`, `>>`, or `<` present |
+
+### `builtins.py`
+
+| Function | Description |
+|---|---|
+| `load_aliases()` | Reads `aliases.json` and merges into `aliases` dict |
+| `save_aliases()` | Writes current `aliases` dict to `aliases.json` |
+| `is_builtin(command)` | Returns True if first word is a built-in or alias |
+| `execute_builtin(command)` | Dispatches to the correct `builtin_*` function |
+| `add_to_history(command)` | Appends command to `command_history` |
+| `builtin_cd(args)` | Change directory |
+| `builtin_ls(args)` | List directory |
+| `builtin_alias(args)` | Create or display aliases |
+| `builtin_set(args)` | Set environment variable |
+| `builtin_env(args)` | Display environment variables |
+| `builtin_history()` | Print command history |
