@@ -761,3 +761,27 @@ mkdir output; echo Hello > output/hello.txt; echo World >> output/hello.txt; typ
 | `builtin_set(args)` | Set environment variable |
 | `builtin_env(args)` | Display environment variables |
 | `builtin_history()` | Print command history |
+
+### `redirection.py`
+
+| Function | Description |
+|---|---|
+| `handle_redirection(command)` | Dispatcher — routes to the correct handler |
+| `run_simple(command)` | Plain command, no operators |
+| `handle_write_redirect(command)` | Handles `>` (overwrite) |
+| `handle_append_redirect(command)` | Handles `>>` (append) |
+| `handle_input_redirect(command)` | Handles `<` (stdin from file) |
+| `handle_pipe(command)` | Multi-stage pipe using `Popen` chains |
+
+### `validation.py`
+
+| Function | Description |
+|---|---|
+| `validate_command(command)` | Returns `(bool, message)` — True if command is syntactically valid |
+| `print_error(message)` | Prints error in red |
+
+### `utils.py`
+
+| Function | Description |
+|---|---|
+| `parse_command(command)` | Returns `(background: bool, command: str)` — strips trailing `&` |
