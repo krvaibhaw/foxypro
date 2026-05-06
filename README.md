@@ -785,3 +785,16 @@ mkdir output; echo Hello > output/hello.txt; echo World >> output/hello.txt; typ
 | Function | Description |
 |---|---|
 | `parse_command(command)` | Returns `(background: bool, command: str)` — strips trailing `&` |
+
+## Known Limitations
+
+- **`rmdir` requires empty directories.** For recursive deletion use the system command directly (e.g., `rm -rf dirname` on Unix).
+- **No tab completion.** Pressing Tab does nothing. File and command names must be typed in full.
+- **No arrow-key history navigation.** Up/down arrows do not cycle through previous commands the way bash/zsh do.
+- **Redirection filename parsing is simple.** The split is on the first occurrence of the operator — filenames containing `>` or `<` in their name are not supported.
+- **`set` is session-only.** Environment variables set with `set` are lost on exit. There is no equivalent of `.bashrc` integration.
+- **Alias chains are limited to one level** in some edge cases. A deeply nested alias loop could cause infinite recursion; no cycle detection is implemented.
+- **No job control.** Background processes (`&`) cannot be brought back to the foreground (`fg`) or suspended (`bg`). Use the OS task manager.
+- **No globbing.** Wildcards like `ls *.py` are passed to the underlying shell via `subprocess` with `shell=True`, so they may work on Unix but behaviour varies by platform.
+
+---
