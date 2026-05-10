@@ -799,18 +799,3 @@ mkdir output; echo Hello > output/hello.txt; echo World >> output/hello.txt; typ
 
 ---
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Make your changes inside `myshell/`
-4. Test manually by running `python bin/main.py`
-5. Submit a pull request with a description of what you changed and why
-
-When adding new built-in commands:
-- Add the function `builti_yourcommand(args)` to `builtins.py`
-- Add the command name to the `BUILTINS` list in `builtins.py`
-- Add a dispatch entry in the `dispatch` dict inside `execute_builtin()`
-- Add a row to the help text in `builtin_help()`
-
----
