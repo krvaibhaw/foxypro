@@ -4,6 +4,45 @@ A lightweight, cross-platform interactive shell built entirely in Python with ze
 
 ---
 
+## Table of Contents
+
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Architecture Overview](#architecture-overview)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [How a Command Gets Executed](#how-a-command-gets-executed)
+- [Built-in Commands](#built-in-commands)
+  - [Navigation](#navigation)
+  - [File Operations](#file-operations)
+  - [System](#system)
+  - [Aliases](#aliases)
+- [Operators & Special Syntax](#operators--special-syntax)
+  - [Pipe `|`](#pipe-)
+  - [Output Redirection `>`](#output-redirection-)
+  - [Append Redirection `>>`](#append-redirection-)
+  - [Input Redirection `<`](#input-redirection-)
+  - [Background Execution `&`](#background-execution-)
+  - [Command Chaining `;`](#command-chaining-)
+  - [Variable Expansion `$VAR`](#variable-expansion-var)
+- [Persistent Aliases](#persistent-aliases)
+  - [How Persistence Works](#how-persistence-works)
+  - [Default Aliases](#default-aliases)
+  - [Manually Editing aliases.json](#manually-editing-aliasesjson)
+- [Environment Variables](#environment-variables)
+- [Command Validation](#command-validation)
+- [Command History](#command-history)
+- [Color Output](#color-output)
+- [Error Handling](#error-handling)
+- [Platform Behaviour](#platform-behaviour)
+- [Practical Examples](#practical-examples)
+- [Module Reference](#module-reference)
+- [Known Limitations](#known-limitations)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
 
 ## Features
 
@@ -98,6 +137,8 @@ bin/main.py
                                                     ├── handle_input_redirect()
                                                     └── run_simple()
 ```
+
+---
 
 ## Requirements
 
@@ -199,7 +240,7 @@ Three possible routes:
 
 ---
 
-# Built-in Commands
+## Built-in Commands
 
 ### Navigation
 
@@ -292,6 +333,7 @@ echo Hello $NAME
 ```
 
 Variables set this way do not persist after the shell exits. Use your OS's profile file (`.bashrc`, `.zshrc`, `System Properties`) for permanent variables.
+
 #### `env [VAR]`
 Display environment variables. With no argument, lists all variables sorted alphabetically with values truncated at 60 characters. With an argument, shows just that one variable.
 
@@ -315,7 +357,6 @@ Display the full built-in command reference with color formatting.
 Save aliases to disk and exit the shell gracefully. Also triggered by Ctrl-D (EOF).
 
 ---
-
 
 ### Aliases
 
@@ -474,6 +515,7 @@ echo $CITY           # London
 echo ${CITY}         # London  (brace syntax — safer in compound strings)
 echo ${CITY}Bridge   # LondonBridge
 ```
+
 If a variable is not set, it expands to an empty string (no error):
 
 ```bash
@@ -528,7 +570,6 @@ These are built into `builtins.py` and are always available, even before `aliase
 | `mk` | `mkdir` | Quick make directory |
 | `rm` | `rmdir` | Quick remove directory |
 
-
 ### Manually Editing aliases.json
 
 The file is plain JSON located at `myshell/aliases.json`. You can edit it directly in any text editor:
@@ -547,6 +588,7 @@ The file is plain JSON located at `myshell/aliases.json`. You can edit it direct
   "back": "cd .."
 }
 ```
+
 Changes take effect the next time the shell starts. If the file contains invalid JSON the shell will print a warning and continue with just the default aliases.
 
 ---
@@ -596,7 +638,6 @@ Foxypro validates every command before executing it. Errors are printed in red a
 | Dangling `<` | `cat <` | `Input redirection has no source filename` |
 
 Escaped quotes (`\"`, `\'`) are not counted as quote openers/closers, so they don't trigger false positives.
- 
 
 ---
 
@@ -786,6 +827,8 @@ mkdir output; echo Hello > output/hello.txt; echo World >> output/hello.txt; typ
 |---|---|
 | `parse_command(command)` | Returns `(background: bool, command: str)` — strips trailing `&` |
 
+---
+
 ## Known Limitations
 
 - **`rmdir` requires empty directories.** For recursive deletion use the system command directly (e.g., `rm -rf dirname` on Unix).
@@ -799,3 +842,18 @@ mkdir output; echo Hello > output/hello.txt; echo World >> output/hello.txt; typ
 
 ---
 
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Make your changes inside `myshell/`
+4. Test manually by running `python bin/main.py`
+5. Submit a pull request with a description of what you changed and why
+
+When adding new built-in commands:
+- Add the function `builtin_yourcommand(args)` to `builtins.py`
+- Add the command name to the `BUILTINS` list in `builtins.py`
+- Add a dispatch entry in the `dispatch` dict inside `execute_builtin()`
+- Add a row to the help text in `builtin_help()`
+
+---
