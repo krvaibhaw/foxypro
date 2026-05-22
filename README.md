@@ -1,6 +1,6 @@
 # 🦊 Foxypro Shell
 
-A lightweight, cross-platform shell wrapper built in Python. Foxypro supports built-in commands, piping, input/output redirection, background process execution, environment variable expansion, command chaining, and persistent aliases. 
+A lightweight, cross-platform interactive shell wrapper built entirely in Python with zero external dependencies. Foxypro provides a familiar terminal experience with built-in commands, piping, input/output redirection, background processes, environment variables, command chaining, and persistent aliases all implemented using only the Python standard library.
 
 ---
 
